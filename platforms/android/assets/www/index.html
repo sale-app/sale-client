@@ -168,26 +168,56 @@
                 </h3>
             </div>
             <div data-role="content">
-                <form action="sale.html" data-transition="slide">
-                    <div data-role="fieldcontain">
-                        <label for="citySelectMenu">
-                            City:
-                        </label>
-                        <select id="citySelectMenu" name="">
+                <div data-role="fieldcontain">
+                    <label for="citySelectMenu">
+                        City:
+                    </label>
+                    <select id="citySelectMenu" name="">
 
-                        </select>
-                    </div>
-                    <div data-role="fieldcontain">
-                        <label for="areaSelectMenu">
-                            Area:
-                        </label>
-                        <select id="areaSelectMenu" name="">
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="areaSelectMenu">
+                        Area:
+                    </label>
+                    <select id="areaSelectMenu" name="">
 
-                        </select>
-                    </div>
-                    <input type="submit" data-inline="true" data-icon="arrow-r" data-iconpos="right"
-                           value="Submit">
-                </form>
+                    </select>
+                </div>
+                <a href="#salePage" data-role="button" data-transition="slide">Submit</a>
+            </div>
+        </div>
+
+        <div data-role="page" id="salePage">
+            <script src="js/sale.js"></script>
+            <div data-role="content">
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+                        <li>
+                            <a href="#salePage" data-transition="fade" data-theme="" data-icon="">
+                                List View
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#salePage" data-transition="fade" data-theme="" data-icon="">
+                                Map View
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#salePage" data-transition="fade" data-theme="" data-icon="">
+                                Categories
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div data-role="fieldcontain">
+                    <input name="" id="searchInput" placeholder="" value="" type="search">
+                </div>
+                <ul id="mallList" data-role="listview" data-divider-theme="b" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        Latest sale
+                    </li>
+                </ul>
             </div>
         </div>
     </body>
