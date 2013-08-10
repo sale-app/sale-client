@@ -1,22 +1,42 @@
-var serviceURL = "http://ec2-54-251-203-201.ap-southeast-1.compute.amazonaws.com:8080/sale/";
+var serviceURL = "http://10.0.2.2:8080/sale/";
 
-var selectedCityId;
-var selectedAreaId;
+var selectedCityId = -1;
+var selectedCityName = "All";
+var selectedAreaId = -1;
+var selectedAreaName = "All";
+var selectedMallId = -1;
+var selectedMallName = "All Stores";
 
 $(document).on('pageinit', '#mainPage' ,function(){
-    getAndSetCityList();
+    if(selectedCityId == -1)
+    {
+        getAndSetCityList();
+    }
+    else
+    {
+        $.mobile.changePage("#salePage",{ transition: "slide"});
+    }
 });
 
 $(document).on('change', '#citySelectMenu' , cityChangeHandler);
+$(document).on('change', '#areaSelectMenu' , areaChangeHandler);
+$(document).on('change', '#mallSelectMenu' , mallChangeHandler);
 
 function cityChangeHandler() {
-    //var cityId = $("#citySelectMenu option:selected").val();
-    selectedCityId = $("#citySelectMenu").val();
+    selectedCityId = $("#citySelectMenu option:selected").val();
+    selectedCityName = $("#citySelectMenu option:selected").text();
     getAndSetAreaList();
 }
 
 function areaChangeHandler() {
-    selectedAreaId = $("#areaSelectMenu").val();
+    selectedAreaId = $("#areaSelectMenu option:selected").val();
+    selectedAreaName = $("#areaSelectMenu option:selected").text();
+    getAndSetMallList();
+}
+
+function mallChangeHandler() {
+    selectedMallId = $("#mallSelectMenu option:selected").val();
+    selectedMallName = $("#mallSelectMenu option:selected").text();
 }
 
 function getAndSetCityList() {
@@ -36,6 +56,7 @@ function getAndSetCityList() {
 }
 
 function getAndSetAreaList() {
+    alert(selectedCityId + "----" + selectedCityName);
     $.getJSON(serviceURL + 'arealist?cityId=' + selectedCityId, function(data) {
 		$('#areaSelectMenu').html('');
 		var areas = data.items;
@@ -49,4 +70,21 @@ function getAndSetAreaList() {
 	.success(function() { })
        .error(function(error) { alert("Got error - " + error.toString()); })
        .complete(function() { });
+}
+
+function getAndSetMallList() {
+    $.getJSON(serviceURL + 'getmalls?cityId=' + selectedCityId + '&areaId=' + selectedAreaId, function(data) {
+        $('#mallSelectMenu').html('');
+        var malls = data.items;
+        $.each(malls, function(index, mall) {
+            $('#mallSelectMenu').append('<option value="' + mall.mallId + '">' + mall.mallName  + '</option>');
+        });
+        $("#mallSelectMenu option:first").attr("selected", "selected");
+        $("#mallSelectMenu").selectmenu('refresh', true);
+        mallChangeHandler();
+    })
+    .success(function() { })
+       .error(function(error) { alert("Got error - " + error.toString()); })
+       .complete(function() { });
+
 }

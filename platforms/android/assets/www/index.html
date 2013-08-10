@@ -157,11 +157,12 @@
         <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css"/>
         <script src="js/jquery-1.9.1.min.js"></script>
         <script src="js/jquery.mobile-1.3.2.min.js"></script>
+        <script src="js/initialize.js"></script>
+        <script src="js/sale.js"></script>
     </head>
     <body>
 
         <div data-role="page" id="mainPage">
-            <script src="js/initialize.js"></script>
             <div data-theme="a" data-role="header">
                 <h3>
                     Select location
@@ -184,41 +185,53 @@
 
                     </select>
                 </div>
+                <div data-role="fieldcontain">
+                    <label for="mallSelectMenu">
+                        Mall:
+                    </label>
+                    <select id="mallSelectMenu" name="">
+
+                    </select>
+                </div>
+
                 <a href="#salePage" data-role="button" data-transition="slide">Submit</a>
             </div>
         </div>
 
         <div data-role="page" id="salePage">
-            <script src="js/sale.js"></script>
+            <div id="cityAreaHeaderDiv" data-theme="a" data-role="header">
+                <a data-role="button" href="#mainPage" data-transition="pop" class="ui-btn-right">
+                    Change
+                </a>
+                <h3 id="cityAreaHeader" style="text-align:left; margin-left:10px;">
+
+                </h3>
+            </div>
+            <div id="categoryHeaderDiv" data-theme="b" data-role="header">
+                <a data-role="button" href="#categoryPage" data-transition="pop" class="ui-btn-right">
+                    Change
+                </a>
+                <h3 id="categoryHeader" style="text-align:left; margin-left:10px;">
+                    Category:
+                </h3>
+            </div>
             <div data-role="content">
-                <div data-role="navbar" data-iconpos="top">
-                    <ul>
-                        <li>
-                            <a href="#salePage" data-transition="fade" data-theme="" data-icon="">
-                                List View
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#salePage" data-transition="fade" data-theme="" data-icon="">
-                                Map View
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#salePage" data-transition="fade" data-theme="" data-icon="">
-                                Categories
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div data-role="fieldcontain">
-                    <input name="" id="searchInput" placeholder="" value="" type="search">
-                </div>
-                <ul id="mallList" data-role="listview" data-divider-theme="b" data-inset="true">
+                <!--div data-role="fieldcontain">
+                    <input name="" id="searchInput" placeholder="" value="" type="search" data-mini="true">
+                </div-->
+                <ul id="saleList" data-role="listview" data-divider-theme="b" data-inset="true" data-filter="true" data-mini="true">
                     <li data-role="list-divider" role="heading">
-                        Latest sale
+                        Latest sales
                     </li>
                 </ul>
             </div>
+
+        </div>
+
+        <div data-role="page" id="categoryPage">
+        </div>
+
+        <div data-role="page" id="storePage">
         </div>
     </body>
 </html>
